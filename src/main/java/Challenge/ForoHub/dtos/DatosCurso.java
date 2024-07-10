@@ -1,9 +1,12 @@
 package Challenge.ForoHub.dtos;
 
-import jakarta.persistence.Column;
+import lombok.*;
 
-public record DatosCurso(
-        String nombre,
-        String categoria
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DatosCurso{
+    Long id;
+    String nombre;
+    String categoria;
 }

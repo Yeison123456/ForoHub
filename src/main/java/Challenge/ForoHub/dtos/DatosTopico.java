@@ -1,12 +1,17 @@
 package Challenge.ForoHub.dtos;
 
+import lombok.*;
 
 import java.util.Date;
-
-public record DatosTopico(
-        String titulo,
-        String mensaje,
-        Date fechaCreacion,
-        Boolean status
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DatosTopico{
+    Long id;
+    String titulo;
+    String mensaje;
+    Date fechaCreacion;
+    Boolean status;
+    Long idAutorFK;
+    Long idCursoFK;
 }

@@ -1,12 +1,10 @@
 package Challenge.ForoHub.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,7 +14,6 @@ import java.io.Serializable;
 @EqualsAndHashCode(of = "id")
 public class Perfil implements Serializable {
 
-    //Columnas de la tabla
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +21,10 @@ public class Perfil implements Serializable {
     @Column(nullable = false, length = 55)
     private String nombre;
 
-    //Relaciones
+    @JsonIgnore
+    @OneToMany(mappedBy = "idPerfilFK",  cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Usuario> usuarioList;
+
 
 
 }

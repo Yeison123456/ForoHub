@@ -1,12 +1,15 @@
 package Challenge.ForoHub.dtos;
 
-import jakarta.persistence.Column;
 
 import java.util.Date;
+import lombok.*;
 
-public record DatosRespuesta(
-        String mensaje,
-        Date fechaCreacion,
-        String solucion
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DatosRespuesta{
+    Long id;
+    String mensaje;
+    Date fechaCreacion;
+    String solucion;
 }

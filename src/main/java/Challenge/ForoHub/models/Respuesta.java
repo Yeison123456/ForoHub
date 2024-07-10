@@ -1,11 +1,8 @@
 package Challenge.ForoHub.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,7 +15,6 @@ import java.util.Date;
 
 public class Respuesta implements Serializable {
 
-    //Columnas de la tabla
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,7 +28,15 @@ public class Respuesta implements Serializable {
     @Column(nullable = false)
     private String solucion;
 
-    //Relaciones
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_topico_fk", nullable = false)
+    private Topico idTopicoFK;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_autor_fk", nullable = false)
+    private Usuario idAutorFK;
 
 
 }

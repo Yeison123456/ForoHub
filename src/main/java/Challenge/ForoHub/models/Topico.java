@@ -1,13 +1,11 @@
 package Challenge.ForoHub.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,7 +15,7 @@ import java.util.Date;
 @EqualsAndHashCode(of = "id")
 public class Topico implements Serializable {
 
-    //Columnas de la tabla
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,8 +32,30 @@ public class Topico implements Serializable {
     @Column(nullable = false)
     private Boolean status;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_curso_fk", nullable = false)
+    private Curso idCursoFK;
 
-    //Relaciones
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_autor_fk", nullable = false)
+    private Usuario idAutorFK;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "idTopicoFK", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<Respuesta> respuestaList;
+
+    @Override
+    public String toString() {
+        return "Topico{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", mensaje='" + mensaje + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", status=" + status +
+                '}';
+    }
 
 
 

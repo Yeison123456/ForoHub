@@ -1,6 +1,12 @@
 package Challenge.ForoHub.dtos;
 
-public record DatosPerfil(
-        String nombre
-) {
+import lombok.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DatosPerfil{
+    Long id;
+    String nombre;
+
 }
